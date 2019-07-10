@@ -36,7 +36,7 @@ module.exports = {
           {
             baseId: `apprTfFEvOaNEFI5i`,
             tableName: `keepers`,
-            tableView: `Keepers`, // optional
+            tableView: `Keepers`,
           },
         ],
       },
