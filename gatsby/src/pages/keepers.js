@@ -6,7 +6,8 @@ export default ({ data }) => {
   console.log(data)
   return (
     <Layout>
-      <div>
+      <div>hey bud</div>
+      {/* <div>
         <h1>some data</h1>
         <table>
           <tr>
@@ -20,19 +21,14 @@ export default ({ data }) => {
             </tr>
           ))}
         </table>
-      </div>
+      </div> */}
     </Layout>
   )
 }
 
 export const query = graphql`
   {
-    allAirtable(
-      filter: {
-        table: { eq: "keepers" }
-        data: { team: { eq: "Bird Rights" } }
-      }
-    ) {
+    allAirtable {
       edges {
         node {
           data {
