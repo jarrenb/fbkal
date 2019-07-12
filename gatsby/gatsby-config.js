@@ -38,6 +38,10 @@ module.exports = {
             tableName: `keepers`,
             tableView: `Keepers`,
           },
+          {
+            baseId: `apprTfFEvOaNEFI5i`,
+            tableName: `teams`,
+          },
         ],
       },
     },
