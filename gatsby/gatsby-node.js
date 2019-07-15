@@ -8,9 +8,9 @@
 
 const path = require(`path`)
 
-// 12 July 2019: in the middle of working on this. check this url to see what i was attempting. trying to take the slug i get from airtable and turn it into a url at pages/keepers for the dynamically made team keeper page https://www.gatsbyjs.org/docs/node-apis/#createPages
-
 exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  const teamKeepersTemplate = path.resolve(`src/templates/team-keepers.js`)
   return graphql(`
     {
       allAirtable(filter: { table: { eq: "teams" } }) {
@@ -24,6 +24,15 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }
   `).then(result => {
-    console.log(JSON.stringify(result, null, 4))
+    if (result.errors) {
+      throw result.errors
+    }
+
+    result.data.allAirtable.edges.forEach(edge => {
+      createPage({
+        path: `/keepers/${edge.node.data.slug}`,
+        component: teamKeepersTemplate,
+      })
+    })
   })
 }
