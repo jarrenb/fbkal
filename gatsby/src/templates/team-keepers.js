@@ -27,13 +27,41 @@ const TeamKeepers = props => {
             <tr key={index}>
               <td>{player.node.data.Player_Name__Team___Position_}</td>
               <td>{player.node.data.acquired}</td>
-              <td>{player.node.data._2012_2013_Salary}</td>
-              <td>{player.node.data._2013_2014_Salary}</td>
-              <td>{player.node.data._2014_2015_Salary}</td>
-              <td>{player.node.data._2015_2016_Salary}</td>
-              <td>{player.node.data._2016_2017_Salary}</td>
-              <td>{player.node.data._2017_2018_Salary}</td>
-              <td>{player.node.data._2018_2019_Salary}</td>
+              <td>
+                {!player.node.data._2012_2013_Salary
+                  ? "-"
+                  : `${player.node.data._2012_2013_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2013_2014_Salary
+                  ? "-"
+                  : `${player.node.data._2013_2014_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2014_2015_Salary
+                  ? "-"
+                  : `${player.node.data._2014_2015_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2015_2016_Salary
+                  ? "-"
+                  : `${player.node.data._2015_2016_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2016_2017_Salary
+                  ? "-"
+                  : `${player.node.data._2016_2017_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2017_2018_Salary
+                  ? "-"
+                  : `${player.node.data._2017_2018_Salary}`}
+              </td>
+              <td>
+                {!player.node.data._2018_2019_Salary
+                  ? "-"
+                  : `${player.node.data._2018_2019_Salary}`}
+              </td>
               <td>{player.node.data.FYOT}</td>
               <td>{player.node.data.CTK}</td>
             </tr>
