@@ -18,6 +18,7 @@ exports.createPages = ({ graphql, actions }) => {
           node {
             data {
               slug
+              name
             }
           }
         }
@@ -32,6 +33,9 @@ exports.createPages = ({ graphql, actions }) => {
       createPage({
         path: `/keepers/${edge.node.data.slug}`,
         component: teamKeepersTemplate,
+        context: {
+          teamName: `${edge.node.data.name}`,
+        },
       })
     })
   })
