@@ -1,39 +1,29 @@
 import React from "react"
 import { graphql } from "gatsby"
+
 import Layout from "../components/layout"
+import KeepersTeamTable from "../components/keepers-team-table"
 
 export default ({ data }) => {
-  console.log(data)
   return (
     <Layout>
-      <div>hey bud</div>
-      {/* <div>
-        <h1>some data</h1>
-        <table>
-          <tr>
-            <th>player</th>
-            <th>team</th>
-          </tr>
-          {data.allAirtable.edges.map(({ node }, index) => (
-            <tr key={index}>
-              <td>{node.data.Player_Name__Team___Position_}</td>
-              <td>{node.data.team}</td>
-            </tr>
-          ))}
-        </table>
-      </div> */}
+      <div>
+        <h2>Keepers</h2>
+        {data.allAirtable.edges.map(({ node }, index) => (
+          <KeepersTeamTable key={index} teamName={node.data.name} />
+        ))}
+      </div>
     </Layout>
   )
 }
 
 export const query = graphql`
   {
-    allAirtable {
+    allAirtable(filter: { table: { eq: "teams" } }) {
       edges {
         node {
           data {
-            Player_Name__Team___Position_
-            team
+            name
           }
         }
       }
