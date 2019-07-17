@@ -4,6 +4,7 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 # todo
 
-- move keepers-team-table back into keepers page (i didn't need to make a component. i thought i did, but i was wrong)
+- style up tables as like a default before steph's design since these gatsby defaults don't work for my needs at all
 - move airtable API key to process.env so that it's hidden
 - style table to match steph's design
+- links to each team's individual keepers page on the keepers page
