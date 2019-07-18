@@ -48,13 +48,41 @@ const Keepers = ({ data }) => {
                   <tr key={index}>
                     <td>{keeper.node.data.Player_Name__Team___Position_}</td>
                     <td>{keeper.node.data.acquired}</td>
-                    <td>{keeper.node.data._2012_2013_Salary}</td>
-                    <td>{keeper.node.data._2013_2014_Salary}</td>
-                    <td>{keeper.node.data._2014_2015_Salary}</td>
-                    <td>{keeper.node.data._2015_2016_Salary}</td>
-                    <td>{keeper.node.data._2016_2017_Salary}</td>
-                    <td>{keeper.node.data._2017_2018_Salary}</td>
-                    <td>{keeper.node.data._2018_2019_Salary}</td>
+                    <td>
+                      {keeper.node.data._2012_2013_Salary
+                        ? `${keeper.node.data._2012_2013_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2013_2014_Salary
+                        ? `${keeper.node.data._2013_2014_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2014_2015_Salary
+                        ? `${keeper.node.data._2014_2015_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2015_2016_Salary
+                        ? `${keeper.node.data._2015_2016_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2016_2017_Salary
+                        ? `${keeper.node.data._2016_2017_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2017_2018_Salary
+                        ? `${keeper.node.data._2017_2018_Salary}`
+                        : "-"}
+                    </td>
+                    <td>
+                      {keeper.node.data._2018_2019_Salary
+                        ? `${keeper.node.data._2018_2019_Salary}`
+                        : "-"}
+                    </td>
                     <td>{keeper.node.data.FYOT}</td>
                     <td>{keeper.node.data.CTK}</td>
                   </tr>
