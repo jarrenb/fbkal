@@ -53,6 +53,7 @@ const Keepers = ({ data }) => {
     <Layout>
       <div>
         <h2>Keepers</h2>
+        <div style={{ marginBottom: `1.5rem` }}>Updated 8 July 2019</div>
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
             <h3>{teamKeepersSection[0].node.data.team}</h3>
