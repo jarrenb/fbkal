@@ -32,6 +32,30 @@ const KeeperTable = styled.table`
   }
 `
 
+const KeeperHeaderCellDisplayDesktop = styled.th`
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+`
+
+const KeeperCellDisplayDesktop = styled.td`
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+`
+
+const KeeperHeaderCellDisplayTablet = styled.th`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+`
+
+const KeeperCellDisplayTablet = styled.td`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+`
+
 const Keepers = ({ data }) => {
   // grab all the teams from each keeper
   const allKeepersTeamsArray = data.allAirtable.edges.map(
@@ -61,15 +85,33 @@ const Keepers = ({ data }) => {
               <thead>
                 <tr>
                   <th>Player</th>
-                  <th>Acquired</th>
-                  <th>12-13 Salary</th>
-                  <th>13-14 Salary</th>
-                  <th>14-15 Salary</th>
-                  <th>15-16 Salary</th>
-                  <th>16-17 Salary</th>
-                  <th>17-18 Salary</th>
-                  <th>18-19 Salary</th>
-                  <th>FYOT</th>
+                  <KeeperHeaderCellDisplayTablet>
+                    Acquired
+                  </KeeperHeaderCellDisplayTablet>
+                  <KeeperHeaderCellDisplayDesktop>
+                    12-13 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayDesktop>
+                    13-14 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayDesktop>
+                    14-15 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayDesktop>
+                    15-16 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayDesktop>
+                    16-17 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayDesktop>
+                    17-18 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayTablet>
+                    18-19 Salary
+                  </KeeperHeaderCellDisplayTablet>
+                  <KeeperHeaderCellDisplayTablet>
+                    FYOT
+                  </KeeperHeaderCellDisplayTablet>
                   <th>CTK</th>
                 </tr>
               </thead>
@@ -77,43 +119,47 @@ const Keepers = ({ data }) => {
                 {teamKeepersSection.map((keeper, index) => (
                   <tr key={index}>
                     <td>{keeper.node.data.Player_Name__Team___Position_}</td>
-                    <td>{keeper.node.data.acquired}</td>
-                    <td>
+                    <KeeperCellDisplayTablet>
+                      {keeper.node.data.acquired}
+                    </KeeperCellDisplayTablet>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2012_2013_Salary
                         ? `$${keeper.node.data._2012_2013_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2013_2014_Salary
                         ? `$${keeper.node.data._2013_2014_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2014_2015_Salary
                         ? `$${keeper.node.data._2014_2015_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2015_2016_Salary
                         ? `$${keeper.node.data._2015_2016_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2016_2017_Salary
                         ? `$${keeper.node.data._2016_2017_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2017_2018_Salary
                         ? `$${keeper.node.data._2017_2018_Salary}`
                         : "-"}
-                    </td>
-                    <td>
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayTablet>
                       {keeper.node.data._2018_2019_Salary
                         ? `$${keeper.node.data._2018_2019_Salary}`
                         : "-"}
-                    </td>
-                    <td>{keeper.node.data.FYOT}</td>
+                    </KeeperCellDisplayTablet>
+                    <KeeperCellDisplayTablet>
+                      {keeper.node.data.FYOT}
+                    </KeeperCellDisplayTablet>
                     <td>{`$${keeper.node.data.CTK}`}</td>
                   </tr>
                 ))}
