@@ -16,3 +16,5 @@ a site for the fantasy basketball keepers auction league. specifically the one i
   3. FBKAL / Keepers / Bird Rights (bird-rights keepers page)
 the header becomes a dynamic path. i just like the idea so much
 - figure out what to do with the homepage. maybe it should just be the keepers page. maybe it should be a blog roll of the stuff that's currently in the announcements channel in the fbkal slack
+- for tablet view, remove all past season's columns from view
+- for phone view, show only player and CTK columns
