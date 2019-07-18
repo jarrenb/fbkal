@@ -1,7 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
+
+const KeeperTable = styled.table`
+  td,
+  th {
+    padding: 0;
+  }
+`
 
 const Keepers = ({ data }) => {
   // grab all the teams from each keeper
@@ -27,7 +35,7 @@ const Keepers = ({ data }) => {
         {teamsKeepers.map((teamKeepersSection, index) => (
           <section key={index}>
             <h3>{teamKeepersSection[0].node.data.team}</h3>
-            <table>
+            <KeeperTable>
               <thead>
                 <tr>
                   <th>Player name (TEAM - POS)</th>
@@ -88,7 +96,7 @@ const Keepers = ({ data }) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </KeeperTable>
           </section>
         ))}
       </div>
