@@ -1,6 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import KeeperHeaderCellDisplayDesktop from "../components/keeper-header-cell-display-desktop"
+import KeeperCellDisplayDesktop from "../components/keeper-cell-display-desktop"
+import KeeperHeaderCellDisplayTablet from "../components/keeper-header-cell-display-tablet"
+import KeeperCellDisplayTablet from "../components/keeper-cell-display-tablet"
 
 const TeamKeepers = props => {
   const playerList = props.data.allAirtable.edges
@@ -10,61 +14,82 @@ const TeamKeepers = props => {
       <table>
         <thead>
           <tr>
-            <th>Player (Team - Pos)</th>
-            <th>Acquired</th>
-            <th>2012-2013 Salary</th>
-            <th>2013-2014 Salary</th>
-            <th>2014-2015 Salary</th>
-            <th>2015-2016 Salary</th>
-            <th>2016-2017 Salary</th>
-            <th>2017-2018 Salary</th>
-            <th>2018-2019 Salary</th>
-            <th>FYOT</th>
+            <th colspan="2">Player</th>
+            <KeeperHeaderCellDisplayTablet>
+              Acquired
+            </KeeperHeaderCellDisplayTablet>
+            <KeeperHeaderCellDisplayDesktop>
+              12-13 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayDesktop>
+              13-14 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayDesktop>
+              14-15 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayDesktop>
+              15-16 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayDesktop>
+              16-17 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayDesktop>
+              17-18 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayTablet>
+              18-19 Salary
+            </KeeperHeaderCellDisplayTablet>
+            <KeeperHeaderCellDisplayTablet>FYOT</KeeperHeaderCellDisplayTablet>
             <th>CTK</th>
           </tr>
         </thead>
         <tbody>
           {playerList.map((player, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{player.node.data.Player_Name__Team___Position_}</td>
-              <td>{player.node.data.acquired}</td>
-              <td>
+              <KeeperCellDisplayTablet>
+                {player.node.data.acquired}
+              </KeeperCellDisplayTablet>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2012_2013_Salary
                   ? "-"
-                  : `${player.node.data._2012_2013_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2012_2013_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2013_2014_Salary
                   ? "-"
-                  : `${player.node.data._2013_2014_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2013_2014_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2014_2015_Salary
                   ? "-"
-                  : `${player.node.data._2014_2015_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2014_2015_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2015_2016_Salary
                   ? "-"
-                  : `${player.node.data._2015_2016_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2015_2016_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2016_2017_Salary
                   ? "-"
-                  : `${player.node.data._2016_2017_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2016_2017_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2017_2018_Salary
                   ? "-"
-                  : `${player.node.data._2017_2018_Salary}`}
-              </td>
-              <td>
+                  : `$${player.node.data._2017_2018_Salary}`}
+              </KeeperCellDisplayDesktop>
+              <KeeperCellDisplayTablet>
                 {!player.node.data._2018_2019_Salary
                   ? "-"
-                  : `${player.node.data._2018_2019_Salary}`}
-              </td>
-              <td>{player.node.data.FYOT}</td>
-              <td>{player.node.data.CTK}</td>
+                  : `$${player.node.data._2018_2019_Salary}`}
+              </KeeperCellDisplayTablet>
+              <KeeperCellDisplayTablet>
+                {player.node.data.FYOT}
+              </KeeperCellDisplayTablet>
+              <td>${player.node.data.CTK}</td>
             </tr>
           ))}
         </tbody>
@@ -79,6 +104,7 @@ export const query = graphql`
   query teamKeeperQuery($teamName: String) {
     allAirtable(
       filter: { table: { eq: "keepers" }, data: { team: { eq: $teamName } } }
+      sort: { fields: data___CTK, order: DESC }
     ) {
       edges {
         node {

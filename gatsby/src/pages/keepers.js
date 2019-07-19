@@ -1,58 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-
 import Layout from "../components/layout"
+import KeeperHeaderCellDisplayDesktop from "../components/keeper-header-cell-display-desktop"
+import KeeperCellDisplayDesktop from "../components/keeper-cell-display-desktop"
+import KeeperHeaderCellDisplayTablet from "../components/keeper-header-cell-display-tablet"
+import KeeperCellDisplayTablet from "../components/keeper-cell-display-tablet"
 
 const KeeperSection = styled.section`
-  margin-bottom: 1.5rem;
   h3 {
     margin-bottom: 0.5rem;
-  }
-`
-
-const KeeperTable = styled.table`
-  font-size: 0.9rem;
-  margin-bottom: 0;
-  tr:hover td {
-    background-color: #ddd;
-  }
-  td,
-  th {
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px;
-    padding-bottom: 0;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0;
-  }
-  th {
-    text-align: center;
-  }
-`
-
-const KeeperHeaderCellDisplayDesktop = styled.th`
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-`
-
-const KeeperCellDisplayDesktop = styled.td`
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-`
-
-const KeeperHeaderCellDisplayTablet = styled.th`
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
-`
-
-const KeeperCellDisplayTablet = styled.td`
-  @media screen and (max-width: 600px) {
-    display: none;
   }
 `
 
@@ -77,14 +34,14 @@ const Keepers = ({ data }) => {
     <Layout>
       <div>
         <h2>Keepers</h2>
-        <div style={{ marginBottom: `1.5rem` }}>Updated 8 July 2019</div>
+        <div style={{ marginBottom: `1.5rem` }}>Updated 19 July 2019</div>
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
             <h3>{teamKeepersSection[0].node.data.team}</h3>
-            <KeeperTable>
+            <table>
               <thead>
                 <tr>
-                  <th>Player</th>
+                  <th colspan="2">Player</th>
                   <KeeperHeaderCellDisplayTablet>
                     Acquired
                   </KeeperHeaderCellDisplayTablet>
@@ -118,6 +75,7 @@ const Keepers = ({ data }) => {
               <tbody>
                 {teamKeepersSection.map((keeper, index) => (
                   <tr key={index}>
+                    <td>{index + 1}</td>
                     <td>{keeper.node.data.Player_Name__Team___Position_}</td>
                     <KeeperCellDisplayTablet>
                       {keeper.node.data.acquired}
@@ -164,7 +122,7 @@ const Keepers = ({ data }) => {
                   </tr>
                 ))}
               </tbody>
-            </KeeperTable>
+            </table>
           </KeeperSection>
         ))}
       </div>
@@ -176,7 +134,10 @@ export default Keepers
 
 export const query = graphql`
   {
-    allAirtable(filter: { table: { eq: "keepers" } }) {
+    allAirtable(
+      filter: { table: { eq: "keepers" } }
+      sort: { fields: data___CTK, order: DESC }
+    ) {
       edges {
         node {
           data {
