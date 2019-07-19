@@ -4,6 +4,7 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 # todo
 
+- setup the homepage as a feed of announcements (html versions of alan's docs (with links to download the associated file), trade announcements, etc...)
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
 - add extra info to keeper tables like totals and available budget
 - style table to match steph's design
