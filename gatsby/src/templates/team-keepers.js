@@ -14,7 +14,7 @@ const TeamKeepers = props => {
       <table>
         <thead>
           <tr>
-            <th colspan="2">Player</th>
+            <th colSpan="2">Player</th>
             <KeeperHeaderCellDisplayTablet>
               Acquired
             </KeeperHeaderCellDisplayTablet>

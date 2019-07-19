@@ -6,6 +6,7 @@ import KeeperHeaderCellDisplayDesktop from "../components/keeper-header-cell-dis
 import KeeperCellDisplayDesktop from "../components/keeper-cell-display-desktop"
 import KeeperHeaderCellDisplayTablet from "../components/keeper-header-cell-display-tablet"
 import KeeperCellDisplayTablet from "../components/keeper-cell-display-tablet"
+import KeeperDataLastUpdated from "../components/keeper-data-last-updated"
 
 const KeeperSection = styled.section`
   h3 {
@@ -34,14 +35,14 @@ const Keepers = ({ data }) => {
     <Layout>
       <div>
         <h2>Keepers</h2>
-        <div style={{ marginBottom: `1.5rem` }}>Updated 19 July 2019</div>
+        <KeeperDataLastUpdated>Updated: 19 July 2019</KeeperDataLastUpdated>
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
             <h3>{teamKeepersSection[0].node.data.team}</h3>
             <table>
               <thead>
                 <tr>
-                  <th colspan="2">Player</th>
+                  <th colSpan="2">Player</th>
                   <KeeperHeaderCellDisplayTablet>
                     Acquired
                   </KeeperHeaderCellDisplayTablet>
