@@ -6,7 +6,6 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
 - add extra info to keeper tables like totals and available budget
-- move airtable API key to process.env so that it's hidden
 - style table to match steph's design
 - links to each team's individual keepers page on the keepers page
 - make header navigation function like:

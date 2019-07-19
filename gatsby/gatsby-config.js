@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `FBKAL`,
@@ -31,7 +35,7 @@ module.exports = {
     {
       resolve: `gatsby-source-airtable`,
       options: {
-        apiKey: `keyO8SssyduM50AlX`, // may instead specify via env, see below
+        apiKey: process.env.AIRTABLE_API_KEY,
         tables: [
           {
             baseId: `apprTfFEvOaNEFI5i`,
