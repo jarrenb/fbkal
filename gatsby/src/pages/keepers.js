@@ -14,9 +14,18 @@ const KeeperSection = styled.section`
   }
 `
 
+const KeeperSectionHeader = styled.div`
+  margin-bottom: 0.5rem;
+  @media screen and (min-width: 625px) {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-template-columns: max-content max-content max-content;
+  }
+`
+
 const Keepers = ({ data }) => {
   // grab all the teams from each keeper
-  const allKeepersTeamsArray = data.allAirtable.edges.map(
+  const allKeepersTeamsArray = data.keeperData.edges.map(
     edge => edge.node.data.team
   )
   // use Set to remove duplicates from allKeepersTeamsArray
@@ -26,7 +35,7 @@ const Keepers = ({ data }) => {
   // loop over eachTeamArray
   const teamsKeepers = eachTeamArray.map(team => {
     // return an array where each team is an array full of keepers
-    return data.allAirtable.edges.filter(player => {
+    return data.keeperData.edges.filter(player => {
       // put keepers into their respective team's arrays
       return player.node.data.team === team
     })
@@ -39,6 +48,14 @@ const Keepers = ({ data }) => {
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
             <h3>{teamKeepersSection[0].node.data.team}</h3>
+            <KeeperSectionHeader>
+              <div>
+                Starting Budget: $
+                {data.teamData.edges[0].node.data.starting_budget}
+              </div>
+              <div>Total CTK: $69</div>
+              <div>Available Budget: $420</div>
+            </KeeperSectionHeader>
             <table>
               <thead>
                 <tr>
@@ -135,9 +152,9 @@ export default Keepers
 
 export const query = graphql`
   {
-    allAirtable(
-      filter: { table: { eq: "keepers" } }
+    keeperData: allAirtable(
       sort: { fields: data___CTK, order: DESC }
+      filter: { table: { eq: "keepers" } }
     ) {
       edges {
         node {
@@ -154,6 +171,17 @@ export const query = graphql`
             _2018_2019_Salary
             FYOT
             CTK
+          }
+        }
+      }
+    }
+    teamData: allAirtable(filter: { table: { eq: "teams" } }) {
+      edges {
+        node {
+          data {
+            name
+            starting_budget
+            open_roster_spots
           }
         }
       }
