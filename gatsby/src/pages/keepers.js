@@ -23,15 +23,26 @@ const KeeperSectionHeader = styled.div`
   }
 `
 
+const reducer = (accumulator, currentValue) => accumulator + currentValue
+
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+})
+
 const Keepers = ({ data }) => {
   // grab all the teams from each keeper
   const allKeepersTeamsArray = data.keeperData.edges.map(
     edge => edge.node.data.team
   )
+
   // use Set to remove duplicates from allKeepersTeamsArray
   const eachTeamSet = new Set(allKeepersTeamsArray)
+
   // turn Set back into an array
   const eachTeamArray = Array.from(eachTeamSet)
+
   // loop over eachTeamArray
   const teamsKeepers = eachTeamArray.map(team => {
     // return an array where each team is an array full of keepers
@@ -40,6 +51,28 @@ const Keepers = ({ data }) => {
       return player.node.data.team === team
     })
   })
+
+  const getTeamStartingBudget = team => {
+    let startingBudget = data.teamData.edges.find(t => {
+      if (t.node.data.name === team) {
+        return t.node.data.starting_budget
+      }
+    })
+    return startingBudget.node.data.starting_budget
+  }
+
+  const getEachCTK = players => {
+    let eachCTK = players.map(player => {
+      return player.node.data.CTK
+    })
+    return eachCTK.reduce(reducer)
+  }
+
+  const getAvailableBudget = (budget, ctk) => {
+    let unformattedAvailableBudget = budget - ctk
+    return formatter.format(unformattedAvailableBudget)
+  }
+
   return (
     <Layout>
       <div>
@@ -51,10 +84,16 @@ const Keepers = ({ data }) => {
             <KeeperSectionHeader>
               <div>
                 Starting Budget: $
-                {data.teamData.edges[0].node.data.starting_budget}
+                {getTeamStartingBudget(teamKeepersSection[0].node.data.team)}
               </div>
-              <div>Total CTK: $69</div>
-              <div>Available Budget: $420</div>
+              <div>Total CTK: ${getEachCTK(teamKeepersSection)}</div>
+              <div>
+                Available Budget:{" "}
+                {getAvailableBudget(
+                  getTeamStartingBudget(teamKeepersSection[0].node.data.team),
+                  getEachCTK(teamKeepersSection)
+                )}
+              </div>
             </KeeperSectionHeader>
             <table>
               <thead>
