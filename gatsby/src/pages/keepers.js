@@ -52,24 +52,36 @@ const Keepers = ({ data }) => {
     })
   })
 
-  const getTeamStartingBudget = team => {
-    let startingBudget = data.teamData.edges.find(t => {
+  const getStartingBudget = team => {
+    const startingBudget = data.teamData.edges.find(t => {
       if (t.node.data.name === team) {
-        return t.node.data.starting_budget
+        return t
       }
     })
     return startingBudget.node.data.starting_budget
   }
 
-  const getEachCTK = players => {
-    let eachCTK = players.map(player => {
+  const getTotalCTK = players => {
+    const firstKeepersTeam = players[0].node.data.team
+    const openRosterSpots = data.teamData.edges.find(t => {
+      if (t.node.data.name === firstKeepersTeam) {
+        return t
+      }
+    })
+    const eachCTK = players.map(player => {
       return player.node.data.CTK
     })
-    return eachCTK.reduce(reducer)
+    const totalCTK = (keeperCTK, openSpots) => {
+      return keeperCTK + openSpots
+    }
+    return totalCTK(
+      eachCTK.reduce(reducer),
+      openRosterSpots.node.data.open_roster_spots
+    )
   }
 
   const getAvailableBudget = (budget, ctk) => {
-    let unformattedAvailableBudget = budget - ctk
+    const unformattedAvailableBudget = budget - ctk
     return formatter.format(unformattedAvailableBudget)
   }
 
@@ -84,14 +96,14 @@ const Keepers = ({ data }) => {
             <KeeperSectionHeader>
               <div>
                 Starting Budget: $
-                {getTeamStartingBudget(teamKeepersSection[0].node.data.team)}
+                {getStartingBudget(teamKeepersSection[0].node.data.team)}
               </div>
-              <div>Total CTK: ${getEachCTK(teamKeepersSection)}</div>
+              <div>Total CTK: ${getTotalCTK(teamKeepersSection)}</div>
               <div>
                 Available Budget:{" "}
                 {getAvailableBudget(
-                  getTeamStartingBudget(teamKeepersSection[0].node.data.team),
-                  getEachCTK(teamKeepersSection)
+                  getStartingBudget(teamKeepersSection[0].node.data.team),
+                  getTotalCTK(teamKeepersSection)
                 )}
               </div>
             </KeeperSectionHeader>
