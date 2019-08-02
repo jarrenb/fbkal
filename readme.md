@@ -4,7 +4,6 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 ## todo
 
-- add additional $1 salaries to factor total CTK on the keepers page
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
 - links to each team's individual keepers page on the keepers page
 - style table to match steph's design

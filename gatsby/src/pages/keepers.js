@@ -135,9 +135,7 @@ const Keepers = ({ data }) => {
                   <KeeperHeaderCellDisplayTablet>
                     18-19 Salary
                   </KeeperHeaderCellDisplayTablet>
-                  <KeeperHeaderCellDisplayTablet>
-                    FYOT
-                  </KeeperHeaderCellDisplayTablet>
+                  <th>FYOT</th>
                   <th>CTK</th>
                 </tr>
               </thead>
@@ -184,9 +182,7 @@ const Keepers = ({ data }) => {
                         ? `$${keeper.node.data._2018_2019_Salary}`
                         : "-"}
                     </KeeperCellDisplayTablet>
-                    <KeeperCellDisplayTablet>
-                      {keeper.node.data.FYOT}
-                    </KeeperCellDisplayTablet>
+                    <td>{keeper.node.data.FYOT}</td>
                     <td>{`$${keeper.node.data.CTK}`}</td>
                   </tr>
                 ))}
