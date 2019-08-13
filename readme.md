@@ -2,6 +2,9 @@
 
 a site for the fantasy basketball keepers auction league. specifically the one i'm a part of, which we call FBKAL
 
+## update log
+- airtable data updated: 2019.8.13
+
 ## todo
 
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
