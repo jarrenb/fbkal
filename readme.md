@@ -3,7 +3,7 @@
 a site for the fantasy basketball keepers auction league. specifically the one i'm a part of, which we call FBKAL
 
 ## update log
-- airtable data updated: 2019.8.13
+- airtable data updated: 2019.8.26
 
 ## todo
 
