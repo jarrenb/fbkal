@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import KeeperHeaderCellDisplayDesktop from "../components/keeper-header-cell-display-desktop"
@@ -11,15 +11,24 @@ import KeeperDataLastUpdated from "../components/keeper-data-last-updated"
 const KeeperSection = styled.section`
   h3 {
     margin-bottom: 0.5rem;
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    a:hover {
+      border-bottom: 2px solid red;
+    }
   }
 `
 
 const KeeperSectionHeader = styled.div`
   margin-bottom: 0.5rem;
-  @media screen and (min-width: 625px) {
-    display: grid;
-    grid-column-gap: 1rem;
-    grid-template-columns: max-content max-content max-content;
+  columns: auto auto;
+  > div {
+    display: inline-block;
+    margin-right: 1rem;
   }
 `
 
@@ -52,6 +61,15 @@ const Keepers = ({ data }) => {
     })
   })
 
+  const getTeamKeepersPageLink = team => {
+    const teamSlug = data.teamData.edges.find(t => {
+      if (t.node.data.name === team) {
+        return t
+      }
+    })
+    return teamSlug.node.data.slug
+  }
+
   const getStartingBudget = team => {
     const startingBudget = data.teamData.edges.find(t => {
       if (t.node.data.name === team) {
@@ -59,6 +77,25 @@ const Keepers = ({ data }) => {
       }
     })
     return startingBudget.node.data.starting_budget
+  }
+
+  const getTotalSalary = players => {
+    const firstKeepersTeam = players[0].node.data.team
+    const openRosterSpots = data.teamData.edges.find(t => {
+      if (t.node.data.name === firstKeepersTeam) {
+        return t
+      }
+    })
+    const eachSalary = players.map(player => {
+      return player.node.data._2019_2020_Salary
+    })
+    const totalSalary = (keeperSalary, openSpots) => {
+      return keeperSalary + openSpots
+    }
+    return totalSalary(
+      eachSalary.reduce(reducer),
+      openRosterSpots.node.data.open_roster_spots
+    )
   }
 
   const getTotalCTK = players => {
@@ -69,7 +106,7 @@ const Keepers = ({ data }) => {
       }
     })
     const eachCTK = players.map(player => {
-      return player.node.data.CTK
+      return player.node.data._2020_2021_CTK
     })
     const totalCTK = (keeperCTK, openSpots) => {
       return keeperCTK + openSpots
@@ -80,8 +117,8 @@ const Keepers = ({ data }) => {
     )
   }
 
-  const getAvailableBudget = (budget, ctk) => {
-    const unformattedAvailableBudget = budget - ctk
+  const getAvailableBudget = (budget, salary) => {
+    const unformattedAvailableBudget = budget - salary
     return formatter.format(unformattedAvailableBudget)
   }
 
@@ -92,19 +129,34 @@ const Keepers = ({ data }) => {
         <KeeperDataLastUpdated>Updated: 19 July 2019</KeeperDataLastUpdated>
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
-            <h3>{teamKeepersSection[0].node.data.team}</h3>
+            <h3>
+              <Link
+                to={`/keepers/${getTeamKeepersPageLink(
+                  teamKeepersSection[0].node.data.team
+                )}`}
+              >
+                {teamKeepersSection[0].node.data.team}
+              </Link>
+            </h3>
             <KeeperSectionHeader>
               <div>
-                Starting Budget: $
+                <strong>Starting Budget:</strong> $
                 {getStartingBudget(teamKeepersSection[0].node.data.team)}
               </div>
-              <div>Total CTK: ${getTotalCTK(teamKeepersSection)}</div>
               <div>
-                Available Budget:{" "}
+                <strong>Total Salary:</strong> $
+                {getTotalSalary(teamKeepersSection)}
+              </div>
+              <div>
+                <strong>Available Budget:</strong>{" "}
                 {getAvailableBudget(
                   getStartingBudget(teamKeepersSection[0].node.data.team),
-                  getTotalCTK(teamKeepersSection)
+                  getTotalSalary(teamKeepersSection)
                 )}
+              </div>
+              <div>
+                <strong>Total 20-21 CTK:</strong> $
+                {getTotalCTK(teamKeepersSection)}
               </div>
             </KeeperSectionHeader>
             <table>
@@ -115,28 +167,19 @@ const Keepers = ({ data }) => {
                     Acquired
                   </KeeperHeaderCellDisplayTablet>
                   <KeeperHeaderCellDisplayDesktop>
-                    12-13 Salary
-                  </KeeperHeaderCellDisplayDesktop>
-                  <KeeperHeaderCellDisplayDesktop>
-                    13-14 Salary
-                  </KeeperHeaderCellDisplayDesktop>
-                  <KeeperHeaderCellDisplayDesktop>
-                    14-15 Salary
-                  </KeeperHeaderCellDisplayDesktop>
-                  <KeeperHeaderCellDisplayDesktop>
-                    15-16 Salary
-                  </KeeperHeaderCellDisplayDesktop>
-                  <KeeperHeaderCellDisplayDesktop>
                     16-17 Salary
                   </KeeperHeaderCellDisplayDesktop>
                   <KeeperHeaderCellDisplayDesktop>
                     17-18 Salary
                   </KeeperHeaderCellDisplayDesktop>
-                  <KeeperHeaderCellDisplayTablet>
+                  <KeeperHeaderCellDisplayDesktop>
                     18-19 Salary
+                  </KeeperHeaderCellDisplayDesktop>
+                  <KeeperHeaderCellDisplayTablet>
+                    19-20 Salary
                   </KeeperHeaderCellDisplayTablet>
                   <th>FYOT</th>
-                  <th>CTK</th>
+                  <th>20-21 CTK</th>
                 </tr>
               </thead>
               <tbody>
@@ -148,26 +191,6 @@ const Keepers = ({ data }) => {
                       {keeper.node.data.acquired}
                     </KeeperCellDisplayTablet>
                     <KeeperCellDisplayDesktop>
-                      {keeper.node.data._2012_2013_Salary
-                        ? `$${keeper.node.data._2012_2013_Salary}`
-                        : "-"}
-                    </KeeperCellDisplayDesktop>
-                    <KeeperCellDisplayDesktop>
-                      {keeper.node.data._2013_2014_Salary
-                        ? `$${keeper.node.data._2013_2014_Salary}`
-                        : "-"}
-                    </KeeperCellDisplayDesktop>
-                    <KeeperCellDisplayDesktop>
-                      {keeper.node.data._2014_2015_Salary
-                        ? `$${keeper.node.data._2014_2015_Salary}`
-                        : "-"}
-                    </KeeperCellDisplayDesktop>
-                    <KeeperCellDisplayDesktop>
-                      {keeper.node.data._2015_2016_Salary
-                        ? `$${keeper.node.data._2015_2016_Salary}`
-                        : "-"}
-                    </KeeperCellDisplayDesktop>
-                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2016_2017_Salary
                         ? `$${keeper.node.data._2016_2017_Salary}`
                         : "-"}
@@ -177,13 +200,18 @@ const Keepers = ({ data }) => {
                         ? `$${keeper.node.data._2017_2018_Salary}`
                         : "-"}
                     </KeeperCellDisplayDesktop>
-                    <KeeperCellDisplayTablet>
+                    <KeeperCellDisplayDesktop>
                       {keeper.node.data._2018_2019_Salary
                         ? `$${keeper.node.data._2018_2019_Salary}`
                         : "-"}
+                    </KeeperCellDisplayDesktop>
+                    <KeeperCellDisplayTablet>
+                      {keeper.node.data._2019_2020_Salary
+                        ? `$${keeper.node.data._2019_2020_Salary}`
+                        : "-"}
                     </KeeperCellDisplayTablet>
                     <td>{keeper.node.data.FYOT}</td>
-                    <td>{`$${keeper.node.data.CTK}`}</td>
+                    <td>{`$${keeper.node.data._2020_2021_CTK}`}</td>
                   </tr>
                 ))}
               </tbody>
@@ -200,7 +228,7 @@ export default Keepers
 export const query = graphql`
   {
     keeperData: allAirtable(
-      sort: { fields: data___CTK, order: DESC }
+      sort: { fields: data____2020_2021_CTK, order: DESC }
       filter: { table: { eq: "keepers" } }
     ) {
       edges {
@@ -209,15 +237,12 @@ export const query = graphql`
             team
             Player_Name__Team___Position_
             acquired
-            _2012_2013_Salary
-            _2013_2014_Salary
-            _2014_2015_Salary
-            _2015_2016_Salary
             _2016_2017_Salary
             _2017_2018_Salary
             _2018_2019_Salary
+            _2019_2020_Salary
             FYOT
-            CTK
+            _2020_2021_CTK
           }
         }
       }
@@ -227,6 +252,7 @@ export const query = graphql`
         node {
           data {
             name
+            slug
             starting_budget
             open_roster_spots
           }

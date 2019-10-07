@@ -19,28 +19,19 @@ const TeamKeepers = props => {
               Acquired
             </KeeperHeaderCellDisplayTablet>
             <KeeperHeaderCellDisplayDesktop>
-              12-13 Salary
-            </KeeperHeaderCellDisplayDesktop>
-            <KeeperHeaderCellDisplayDesktop>
-              13-14 Salary
-            </KeeperHeaderCellDisplayDesktop>
-            <KeeperHeaderCellDisplayDesktop>
-              14-15 Salary
-            </KeeperHeaderCellDisplayDesktop>
-            <KeeperHeaderCellDisplayDesktop>
-              15-16 Salary
-            </KeeperHeaderCellDisplayDesktop>
-            <KeeperHeaderCellDisplayDesktop>
               16-17 Salary
             </KeeperHeaderCellDisplayDesktop>
             <KeeperHeaderCellDisplayDesktop>
               17-18 Salary
             </KeeperHeaderCellDisplayDesktop>
-            <KeeperHeaderCellDisplayTablet>
+            <KeeperHeaderCellDisplayDesktop>
               18-19 Salary
+            </KeeperHeaderCellDisplayDesktop>
+            <KeeperHeaderCellDisplayTablet>
+              19-20 Salary
             </KeeperHeaderCellDisplayTablet>
-            <KeeperHeaderCellDisplayTablet>FYOT</KeeperHeaderCellDisplayTablet>
-            <th>CTK</th>
+            <th>FYOT</th>
+            <th>20-21 CTK</th>
           </tr>
         </thead>
         <tbody>
@@ -52,26 +43,6 @@ const TeamKeepers = props => {
                 {player.node.data.acquired}
               </KeeperCellDisplayTablet>
               <KeeperCellDisplayDesktop>
-                {!player.node.data._2012_2013_Salary
-                  ? "-"
-                  : `$${player.node.data._2012_2013_Salary}`}
-              </KeeperCellDisplayDesktop>
-              <KeeperCellDisplayDesktop>
-                {!player.node.data._2013_2014_Salary
-                  ? "-"
-                  : `$${player.node.data._2013_2014_Salary}`}
-              </KeeperCellDisplayDesktop>
-              <KeeperCellDisplayDesktop>
-                {!player.node.data._2014_2015_Salary
-                  ? "-"
-                  : `$${player.node.data._2014_2015_Salary}`}
-              </KeeperCellDisplayDesktop>
-              <KeeperCellDisplayDesktop>
-                {!player.node.data._2015_2016_Salary
-                  ? "-"
-                  : `$${player.node.data._2015_2016_Salary}`}
-              </KeeperCellDisplayDesktop>
-              <KeeperCellDisplayDesktop>
                 {!player.node.data._2016_2017_Salary
                   ? "-"
                   : `$${player.node.data._2016_2017_Salary}`}
@@ -81,15 +52,18 @@ const TeamKeepers = props => {
                   ? "-"
                   : `$${player.node.data._2017_2018_Salary}`}
               </KeeperCellDisplayDesktop>
-              <KeeperCellDisplayTablet>
+              <KeeperCellDisplayDesktop>
                 {!player.node.data._2018_2019_Salary
                   ? "-"
                   : `$${player.node.data._2018_2019_Salary}`}
-              </KeeperCellDisplayTablet>
+              </KeeperCellDisplayDesktop>
               <KeeperCellDisplayTablet>
-                {player.node.data.FYOT}
+                {!player.node.data._2019_2020_Salary
+                  ? "-"
+                  : `$${player.node.data._2019_2020_Salary}`}
               </KeeperCellDisplayTablet>
-              <td>${player.node.data.CTK}</td>
+              <td>{player.node.data.FYOT}</td>
+              <td>${player.node.data._2020_2021_CTK}</td>
             </tr>
           ))}
         </tbody>
@@ -104,7 +78,7 @@ export const query = graphql`
   query teamKeeperQuery($teamName: String) {
     allAirtable(
       filter: { table: { eq: "keepers" }, data: { team: { eq: $teamName } } }
-      sort: { fields: data___CTK, order: DESC }
+      sort: { fields: data____2020_2021_CTK, order: DESC }
     ) {
       edges {
         node {
@@ -118,8 +92,9 @@ export const query = graphql`
             _2016_2017_Salary
             _2017_2018_Salary
             _2018_2019_Salary
+            _2019_2020_Salary
             FYOT
-            CTK
+            _2020_2021_CTK
           }
         }
       }
