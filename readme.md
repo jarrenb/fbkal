@@ -9,6 +9,9 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 ## todo
 
 - separate each keeper page into a keepers component and build keepers and individual team-keepers pages from that keepers component
+- on keepers page: useful league statistics like average keeper salary, average full years on team, total trades
+- on each keeper team section: useful averages like average salary, average full years on team
+- figure out a way to show other useful information like more precisely where players came from (draft picks, trades, etc...), amount of trades a team has made, team overall statistics or totals or both, etc...
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
 - links to each team's individual keepers page on the keepers page
 - style table to match steph's design
