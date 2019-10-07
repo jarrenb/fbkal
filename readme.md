@@ -8,6 +8,7 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 ## todo
 
+- separate each keeper page into a keepers component and build keepers and individual team-keepers pages from that keepers component
 - allow sorting and sort by CTK by default both keepers and each team's individual keeper page
 - links to each team's individual keepers page on the keepers page
 - style table to match steph's design
