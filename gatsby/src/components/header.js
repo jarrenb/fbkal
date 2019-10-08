@@ -19,7 +19,7 @@ const Header = ({ siteTitle }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          {siteTitle} / Keepers
         </Link>
       </h1>
     </div>

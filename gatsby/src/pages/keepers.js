@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import styled from "styled-components"
+import SEO from "../components/seo"
 import Layout from "../components/layout"
 import KeeperHeaderCellDisplayDesktop from "../components/keeper-header-cell-display-desktop"
 import KeeperCellDisplayDesktop from "../components/keeper-cell-display-desktop"
@@ -124,6 +125,7 @@ const Keepers = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Keepers" />
       <div>
         <h2>Keepers</h2>
         <KeeperDataLastUpdated>Updated: 19 July 2019</KeeperDataLastUpdated>

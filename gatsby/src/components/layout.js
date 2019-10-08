@@ -8,7 +8,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Link } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
@@ -34,19 +33,7 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <div
-          style={{
-            paddingBottom: `1.45rem`,
-          }}
-        >
-          <Link to="/keepers">Keepers</Link>
-        </div>
         <main>{children}</main>
-        {/* <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer> */}
       </div>
     </>
   )
