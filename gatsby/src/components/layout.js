@@ -3,8 +3,9 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import "./layout.css"
 import Header from "./Header"
+import Nav from "./Nav"
 
-const Layout = ({ children }) => {
+const Layout = ({ breadcrumbs, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -17,7 +18,8 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header />
+      <Nav />
+      <Header breadcrumbs={breadcrumbs} />
       <div
         style={{
           margin: `0 auto`,

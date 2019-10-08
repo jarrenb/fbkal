@@ -123,8 +123,13 @@ const Keepers = ({ data }) => {
     return formatter.format(unformattedAvailableBudget)
   }
 
+  const breadcrumbs = [
+    { to: "/", title: "FBKAL" },
+    { to: "/keepers", title: "Keepers" },
+  ]
+
   return (
-    <Layout>
+    <Layout breadcrumbs={breadcrumbs}>
       <SEO title="Keepers" />
       <div>
         <KeeperDataLastUpdated>Updated: 19 July 2019</KeeperDataLastUpdated>

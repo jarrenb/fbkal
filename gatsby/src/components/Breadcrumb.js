@@ -5,7 +5,7 @@ const Breadcrumb = props => {
   let children = React.Children.toArray(props.children)
 
   children = children.map((child, index) => (
-    <BreadcrumbItem key={`breadcrumb_item${index}`}>{child}</BreadcrumbItem>
+    <BreadcrumbItem key={`breadcrumb_item_${index}`}>{child}</BreadcrumbItem>
   ))
 
   const lastIndex = children.length - 1

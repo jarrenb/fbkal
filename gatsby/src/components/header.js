@@ -1,14 +1,8 @@
-import PropTypes from "prop-types"
 import React from "react"
 import { Link } from "gatsby"
 import Breadcrumb from "./Breadcrumb"
 
-const Header = () => {
-  const breadcrumbs = [
-    { to: "/", title: "FBKAL" },
-    // { to: "/keepers", label: "Keepers" },
-  ]
-
+const Header = ({ breadcrumbs }) => {
   return (
     <header>
       <div
@@ -19,8 +13,8 @@ const Header = () => {
         }}
       >
         <Breadcrumb>
-          {breadcrumbs.map(({ to, title }) => (
-            <Link key={to} to={to}>
+          {breadcrumbs.map(({ to, title }, index) => (
+            <Link key={`breadcrumb_link_${index}`} to={to}>
               {title}
             </Link>
           ))}
@@ -28,14 +22,6 @@ const Header = () => {
       </div>
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header
