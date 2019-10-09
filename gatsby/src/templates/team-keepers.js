@@ -8,8 +8,14 @@ import KeeperCellDisplayTablet from "../components/keeper-cell-display-tablet"
 
 const TeamKeepers = props => {
   const playerList = props.data.allAirtable.edges
+
+  const breadcrumbs = [
+    { to: "/", title: "FBKAL" },
+    { to: "/keepers", title: "Keepers" },
+    { to: props.pageContext.slug, title: props.pageContext.teamName },
+  ]
   return (
-    <Layout>
+    <Layout breadcrumbs={breadcrumbs}>
       <h2>{props.pageContext.teamName}</h2>
       <table>
         <thead>

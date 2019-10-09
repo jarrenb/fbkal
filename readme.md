@@ -8,6 +8,7 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 ## todo
 
+- FIX BREADCRUMB HEADER i've made a dynamic header of breadcrumbs and i like it, but i don't think it's quite as automatic or useful as i'd like it to be
 - separate each keeper page into a keepers component and build keepers and individual team-keepers pages from that keepers component
 - on keepers page: useful league statistics like average keeper salary, average full years on team, total trades
 - on each keeper team section: useful averages like average salary, average full years on team
