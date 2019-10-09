@@ -9,8 +9,14 @@ import KeeperHeaderCellDisplayTablet from "../components/keeper-header-cell-disp
 import KeeperCellDisplayTablet from "../components/keeper-cell-display-tablet"
 import KeeperDataLastUpdated from "../components/keeper-data-last-updated"
 
-const KeeperSection = styled.section`
+const KeeperPageSection = styled.section`
   h2 {
+    margin-bottom: 0.5rem;
+  }
+`
+
+const KeeperSection = styled.section`
+  h3 {
     margin-bottom: 0.5rem;
 
     a {
@@ -125,17 +131,18 @@ const Keepers = ({ data }) => {
 
   const breadcrumbs = [
     { to: "/", title: "FBKAL" },
-    { to: "/keepers", title: "Keepers" },
+    // { to: "/keepers", title: "Keepers" },
   ]
 
   return (
     <Layout breadcrumbs={breadcrumbs}>
       <SEO title="Keepers" />
-      <div>
+      <KeeperPageSection>
+        <h2>Keepers</h2>
         <KeeperDataLastUpdated>Updated: 19 July 2019</KeeperDataLastUpdated>
         {teamsKeepers.map((teamKeepersSection, index) => (
           <KeeperSection key={index}>
-            <h2>
+            <h3>
               <Link
                 to={`/keepers/${getTeamKeepersPageLink(
                   teamKeepersSection[0].node.data.team
@@ -143,7 +150,7 @@ const Keepers = ({ data }) => {
               >
                 {teamKeepersSection[0].node.data.team}
               </Link>
-            </h2>
+            </h3>
             <KeeperSectionHeader>
               <div>
                 <strong>Starting Budget:</strong> $
@@ -226,7 +233,7 @@ const Keepers = ({ data }) => {
             </table>
           </KeeperSection>
         ))}
-      </div>
+      </KeeperPageSection>
     </Layout>
   )
 }

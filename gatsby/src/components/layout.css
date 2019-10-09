@@ -198,7 +198,6 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -234,6 +233,7 @@ h1 {
   line-height: 1.1;
 }
 h2 {
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -241,7 +241,6 @@ h2 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -249,6 +248,7 @@ h2 {
   line-height: 1.1;
 }
 h3 {
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -256,7 +256,6 @@ h3 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -264,6 +263,7 @@ h3 {
   line-height: 1.1;
 }
 h4 {
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -271,7 +271,6 @@ h4 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -279,6 +278,7 @@ h4 {
   line-height: 1.1;
 }
 h5 {
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -286,7 +286,6 @@ h5 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -309,6 +308,7 @@ h6 {
   line-height: 1.1;
 }
 hgroup {
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -316,7 +316,6 @@ hgroup {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
 }
 ul {
   margin-left: 1.45rem;

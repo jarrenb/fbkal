@@ -1,17 +1,26 @@
 import React from "react"
 import { Link } from "gatsby"
+import styled from "styled-components"
+
+const NavSection = styled.section`
+  margin-bottom: 1rem;
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  a:hover {
+    border-bottom: 2px solid red;
+  }
+`
 
 const Nav = () => (
-  <div
-    style={{
-      margin: `0 auto`,
-      maxWidth: 1450,
-      paddingLeft: `1.0875rem`,
-      paddingRight: `1.0875rem`,
-    }}
-  >
-    <Link to="/keepers">keepers</Link>
-  </div>
+  <NavSection>
+    <strong>
+      <Link to="/keepers">Keepers</Link>
+    </strong>
+  </NavSection>
 )
 
 export default Nav
