@@ -165,7 +165,7 @@ const Keepers = ({ data }) => {
                 <span>
                   {getAvailableBudget(
                     getStartingBudget(teamKeepersSection[0].node.data.team),
-                    getTotalSalary(teamKeepersSection)
+                    getTotalCTK(teamKeepersSection)
                   )}
                 </span>
               </div>
