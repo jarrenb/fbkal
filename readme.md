@@ -4,7 +4,7 @@ a site for the fantasy basketball keepers auction league. specifically the one i
 
 ## update log
 
-- airtable data updated: monday 2019.10.7 9:33am MT
+- airtable data updated: monday 2019.10.28 11:12am MT
 
 ## todo
 
